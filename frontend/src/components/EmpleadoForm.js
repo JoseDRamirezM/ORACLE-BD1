@@ -77,7 +77,7 @@ const EmpleadoForm = (props) => {
                 </table>
                 <div className="space">
                     <button type="submit" className="button">
-                        add
+                        Agregar
                     </button>
                 </div>
             </form>

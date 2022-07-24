@@ -78,7 +78,7 @@ const EditarEmpleado = (props) => {
                 </table>
                 <div className="space">
                     <button type="submit" className="button">
-                        add
+                        Editar
                     </button>
                 </div>
             </form>

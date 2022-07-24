@@ -86,22 +86,30 @@ const App = () => {
             nuevoCargo &&
             nuevoSalario
         ) {
-            const objetoNuevoEmpleado = {
-                nombres: nuevoNombres,
-                apellidos: nuevoApellidos,
-                fecha_contratacion: nuevoFechaContratacion,
-                cargo: nuevoCargo,
-                salario: nuevoSalario,
-                documento: nuevoDocumento,
-            };
-            console.log(objetoNuevoEmpleado);
-            empleadosService
-                .create(objetoNuevoEmpleado)
-                .then((newEmpleado) => {
-                    window.location.reload();
-                    console.log(newEmpleado);
-                })
-                .catch((error) => console.log(error.message));
+            const check = empleados.filter(
+                (empleado) => empleado.DOCUMENTO === nuevoDocumento
+            );
+            console.log(check);
+            if (check.length > 0) {
+                alert('duplicado');
+            } else {
+                const objetoNuevoEmpleado = {
+                    nombres: nuevoNombres,
+                    apellidos: nuevoApellidos,
+                    fecha_contratacion: nuevoFechaContratacion,
+                    cargo: nuevoCargo,
+                    salario: nuevoSalario,
+                    documento: nuevoDocumento,
+                };
+                console.log(objetoNuevoEmpleado);
+                empleadosService
+                    .create(objetoNuevoEmpleado)
+                    .then((newEmpleado) => {
+                        window.location.reload();
+                        console.log(newEmpleado);
+                    })
+                    .catch((error) => console.log(error.message));
+            }
         }
     };
 
