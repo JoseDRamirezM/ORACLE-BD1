@@ -89,7 +89,6 @@ const App = () => {
             const check = empleados.filter(
                 (empleado) => empleado.DOCUMENTO === nuevoDocumento
             );
-            console.log(check);
             if (check.length > 0) {
                 alert('duplicado');
             } else {
@@ -123,22 +122,29 @@ const App = () => {
             editarCargo &&
             editarSalario
         ) {
-            const empleadoActualizado = {
-                ID: parseInt(editarID),
-                nombres: editarNombres,
-                apellidos: editarApellidos,
-                fecha_contratacion: editarFechaContratacion,
-                cargo: editarCargo,
-                salario: parseInt(editarSalario),
-                documento: editarDocumento,
-            };
-            empleadosService
-                .update(empleadoActualizado)
-                .then((actualizado) => {
-                    window.location.reload();
-                    console.log(actualizado);
-                })
-                .catch((error) => console.log(error.message));
+            const check = empleados.filter(
+                (empleado) => empleado.DOCUMENTO === editarDocumento
+            );
+            if (check.length > 0 && editarID != check.pop().ID) {
+                alert('Ya existe un empleado con ese documento');
+            } else {
+                const empleadoActualizado = {
+                    ID: parseInt(editarID),
+                    nombres: editarNombres,
+                    apellidos: editarApellidos,
+                    fecha_contratacion: editarFechaContratacion,
+                    cargo: editarCargo,
+                    salario: parseInt(editarSalario),
+                    documento: editarDocumento,
+                };
+                empleadosService
+                    .update(empleadoActualizado)
+                    .then((actualizado) => {
+                        window.location.reload();
+                        console.log(actualizado);
+                    })
+                    .catch((error) => console.log(error.message));
+            }
         }
     };
 
